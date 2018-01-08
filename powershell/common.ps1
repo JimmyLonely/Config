@@ -1,6 +1,8 @@
 
-# Alias
-Set-Alias -Name ps -Value Get-Process
+## Alias
+function ll () {
+    Get-ChildItem -Path . -Force
+}
 
 # Git
 function Git-Rebase ($count) {
@@ -21,7 +23,6 @@ function Git-Branch ($name) {
         git checkout $name
     }
 }
-
 Set-Alias -Name gb -Value Git-Branch
 Set-Alias -Name branch -Value Git-Branch
 
@@ -32,7 +33,6 @@ function Git-Branch-Deleted ($name) {
         git branch --delete --force $name
     }
 }
-
 Set-Alias -Name gbd -Value Git-Branch-Deleted
 
 function Git-Log () {
@@ -63,6 +63,29 @@ function Get-Red-Record ($fileName) {
     }
 }
 
+function Split-Files ($count) {
+    $files = Get-ChildItem -Path . -Filter * | Where-Object -FilterScript {$_.PSIsContainer -eq $false}
+    $splitCount = [math]::Ceiling($files.Length/$count)
+    For($i = 0; $i -lt $splitCount; $i++)
+    {
+        New-Item -Path "$i" -ItemType Directory
+        $tmpFiles = $files |Select-Object -Skip ($i * $count) -First $count
+        $tmpFiles| ForEach-Object -Process {Move-Item -Destination $i -Path $_.fullName }
+
+    }
+}
+
+function Join-Files()
+{
+    $files = Get-ChildItem -Path . -Filter * -Recurse | Where-Object -FilterScript {$_.psisContainer -eq $false}
+    For ($i = 0; $i -lt $files.Length; $i++)
+    {
+        Move-Item -Path $files[$i].FullName -Destination .
+    }
+
+    $folders = Get-ChildItem -Path . -Filter * | Where-Object -FilterScript {$_.psisContainer -eq $true}
+    $folders | del
+}
+
 # Init
-Clear-Host
 

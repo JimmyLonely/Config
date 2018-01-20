@@ -37,7 +37,7 @@ Set-Alias -Name gbd -Value Git-Branch-Deleted
 
 function Git-Log () {
     Write-Host '-------- Log ---------'
-    git log --oneline
+    git log --oneline --max-count=5
 }
 Set-Alias -Name log -Value Git-Log
 

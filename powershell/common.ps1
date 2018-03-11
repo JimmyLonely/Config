@@ -17,21 +17,21 @@ function Git-Commit-Temp () {
 Set-Alias -Name gct -Value Git-Commit-Temp
 
 function Git-Branch ($name) {
-    if(!$name) {
-        git branch
-    } else {
+    if($name) {
         git checkout $name
     }
+    git branch
+    Git-Log
 }
 Set-Alias -Name gb -Value Git-Branch
 Set-Alias -Name branch -Value Git-Branch
 
 function Git-Branch-Deleted ($name) {
-    if(!$name) {
-        git branch
-    } else {
+    if($name) {
         git branch --delete --force $name
     }
+    git branch
+    Git-Log
 }
 Set-Alias -Name gbd -Value Git-Branch-Deleted
 

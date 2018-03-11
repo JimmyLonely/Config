@@ -1,0 +1,3 @@
+@ECHO OFF
+D:
+CD D:\VSCode

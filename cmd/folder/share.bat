@@ -1,0 +1,2 @@
+@ECHO OFF
+START F:\Share

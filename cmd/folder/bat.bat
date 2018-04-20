@@ -1,2 +1,2 @@
 @ECHO OFF
-START %OneDrive%\Win10\cmd
+START %OneDrive%\Config\cmd

@@ -15,6 +15,37 @@ $D = [PSCustomObject][Ordered]@{
     Tmp = "C:\Users\cnlizhi1\Desktop\tmp"
 }
 
+$files = [PSCustomObject][Ordered]@{
+    Everything = "$env:ProgramFiles\Everything\Everything.exe"
+}
+
+# ShortName
+
+function Doc () {
+    Start-Process  -FilePath  $D.Doc;
+}
+
+function Task () {
+    Start-Process  -FilePath  $D.Task;
+}
+
+function OneDrive () {
+    Start-Process  -FilePath  $D.OneDrive;
+}
+
+function Swap () {
+    Start-Process  -FilePath  $D.Swap;
+}
+
+function Tmp () {
+    Start-Process  -FilePath  $D.Tmp;
+}
+
+function qfind () {
+    start $files.Everything
+}
+
+
 # Init
 Clear-Host
 Write-Host "Welcome to windows"
